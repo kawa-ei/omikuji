@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おみくじ</title>
+    <style>
+        body {
+            background-color: rgb(223, 250, 150);
+            text-align: center;
+        }
+
+        p {
+            font-size: 2em;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .hiku {
+            width: 200px;
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .kekkaBack {
+            background-color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #kekkaBack img {
+            opacity: 0;
+            transform: scale(2);
+        }
+
+        #kekkaBack img.fuwa {
+            opacity: 1;
+            transition: 3s;
+            transform: none;
+        }
+
+        .reload {
+            display: none;
+            position: fixed;
+            bottom:10%;
+            width: 200px;
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <p>今年の運勢を占いましょう</p>
+
+    <div>
+        <img src="img/omijikuji.png" alt="" width="200px">
+    </div>
+
+    <button id="btn" class="hiku">
+        くじを引く
+    </button>
+
+
+    <div id="kekkaBack" class="">
+        <img id="gazo"  alt="">
+
+        <!-- リロードボタン -->
+        <button id="reload" class="reload" onclick="window.location.reload();">
+            もう一回引く
+        </button>
+
+    </div>
+
+    <script>
+        // let kujis = ["大吉", "中吉", "吉", "小吉", "末吉", "凶", "大凶"];
+
+        let kujisGazo = ["img/daikichi.png", "img/daikyou.png", "img/kichi.png"];
+        // document.getElementById("kekka").innerHTML = "あなたの運勢は" + kujis[kuji] + "です。"
+        // document.write("<p>あなたの運勢は" + kujis[kuji] + "です。</p>");
+        // alert("あなたの運勢は" + kujis[kuji] + "です。");
+
+        document.getElementById("btn").addEventListener("click", function(){
+            let kuji = Math.floor(Math.random() * kujisGazo.length);
+
+            document.getElementById("kekkaBack").classList.add("kekkaBack");
+
+            // document.getElementById("kekka").innerHTML = "<b>" + kujis[kuji] + "</b>"
+            document.getElementById("gazo").src = kujisGazo[kuji]
+            document.getElementById("gazo").classList.add("fuwa");
+
+            // 後からボタンを表示(タイマー)
+            setTimeout(function(){
+            // styleをいじる
+            document.getElementById("reload").style.display = "block";
+            }, 3000);
+
+        })
+    </script>
+
+    
+</body>
+</html>
